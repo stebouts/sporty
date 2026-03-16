@@ -1,0 +1,214 @@
+{
+  "info": {
+    "name": "Sporty Betting API",
+    "description": "Sports Betting Settlement Trigger Service — REST API collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Bets",
+      "item": [
+        {
+          "name": "Get All Bets",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/bets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bets"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK — seeded bets",
+              "status": "OK",
+              "code": 200,
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/bets",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "bets"]
+                }
+              },
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": "[\n  {\"betId\":\"bet-001\",\"userId\":\"user-1\",\"eventId\":\"event-100\",\"eventMarketId\":\"market-A\",\"eventWinnerId\":\"team-A\",\"betAmount\":50.00},\n  {\"betId\":\"bet-002\",\"userId\":\"user-2\",\"eventId\":\"event-100\",\"eventMarketId\":\"market-A\",\"eventWinnerId\":\"team-B\",\"betAmount\":30.00},\n  {\"betId\":\"bet-003\",\"userId\":\"user-3\",\"eventId\":\"event-100\",\"eventMarketId\":\"market-A\",\"eventWinnerId\":\"team-A\",\"betAmount\":20.00},\n  {\"betId\":\"bet-004\",\"userId\":\"user-4\",\"eventId\":\"event-200\",\"eventMarketId\":\"market-B\",\"eventWinnerId\":\"team-C\",\"betAmount\":75.00},\n  {\"betId\":\"bet-005\",\"userId\":\"user-5\",\"eventId\":\"event-200\",\"eventMarketId\":\"market-B\",\"eventWinnerId\":\"team-D\",\"betAmount\":40.00}\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get Bets by Event ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/bets/event/event-100",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bets", "event", "event-100"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK — bets for event-100",
+              "status": "OK",
+              "code": 200,
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/bets/event/event-100",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "bets", "event", "event-100"]
+                }
+              },
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": "[\n  {\"betId\":\"bet-001\",\"userId\":\"user-1\",\"eventId\":\"event-100\",\"eventMarketId\":\"market-A\",\"eventWinnerId\":\"team-A\",\"betAmount\":50.00},\n  {\"betId\":\"bet-002\",\"userId\":\"user-2\",\"eventId\":\"event-100\",\"eventMarketId\":\"market-A\",\"eventWinnerId\":\"team-B\",\"betAmount\":30.00},\n  {\"betId\":\"bet-003\",\"userId\":\"user-3\",\"eventId\":\"event-100\",\"eventMarketId\":\"market-A\",\"eventWinnerId\":\"team-A\",\"betAmount\":20.00}\n]"
+            },
+            {
+              "name": "200 OK — no bets for event",
+              "status": "OK",
+              "code": 200,
+              "originalRequest": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/bets/event/event-999",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "bets", "event", "event-999"]
+                }
+              },
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": "[]"
+            }
+          ]
+        },
+        {
+          "name": "Create Bet",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/bets",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "bets"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"betId\": \"bet-new-001\",\n  \"userId\": \"user-10\",\n  \"eventId\": \"event-100\",\n  \"eventMarketId\": \"market-A\",\n  \"eventWinnerId\": \"team-A\",\n  \"betAmount\": 100.00\n}",
+              "options": {
+                "raw": {"language": "json"}
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "200 OK — bet created",
+              "status": "OK",
+              "code": 200,
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/bets",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "bets"]
+                },
+                "header": [{"key": "Content-Type", "value": "application/json"}],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"betId\": \"bet-new-001\",\n  \"userId\": \"user-10\",\n  \"eventId\": \"event-100\",\n  \"eventMarketId\": \"market-A\",\n  \"eventWinnerId\": \"team-A\",\n  \"betAmount\": 100.00\n}"
+                }
+              },
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": "{\n  \"betId\": \"bet-new-001\",\n  \"userId\": \"user-10\",\n  \"eventId\": \"event-100\",\n  \"eventMarketId\": \"market-A\",\n  \"eventWinnerId\": \"team-A\",\n  \"betAmount\": 100.00\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Event Outcomes",
+      "item": [
+        {
+          "name": "Publish Event Outcome (triggers settlement)",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/event-outcomes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "event-outcomes"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"event-100\",\n  \"eventName\": \"Champions League Final\",\n  \"eventWinnerId\": \"team-A\"\n}",
+              "options": {
+                "raw": {"language": "json"}
+              }
+            }
+          },
+          "response": [
+            {
+              "name": "202 Accepted",
+              "status": "Accepted",
+              "code": 202,
+              "originalRequest": {
+                "method": "POST",
+                "url": {
+                  "raw": "{{baseUrl}}/api/event-outcomes",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "event-outcomes"]
+                },
+                "header": [{"key": "Content-Type", "value": "application/json"}],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"eventId\": \"event-100\",\n  \"eventName\": \"Champions League Final\",\n  \"eventWinnerId\": \"team-A\"\n}"
+                }
+              },
+              "header": [{"key": "Content-Type", "value": "application/json"}],
+              "body": "{\n  \"status\": \"accepted\",\n  \"message\": \"Event outcome published to Kafka\",\n  \"eventId\": \"event-100\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Publish Event Outcome — event-200",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/event-outcomes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "event-outcomes"]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventId\": \"event-200\",\n  \"eventName\": \"Premier League Match\",\n  \"eventWinnerId\": \"team-C\"\n}",
+              "options": {
+                "raw": {"language": "json"}
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
